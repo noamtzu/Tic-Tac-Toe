@@ -1,7 +1,7 @@
 {
   "name": "react.dev",
   "version": "0.0.0",
-  "main": "/src/index.js",
+  "main": "/src/index.ts",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -9,11 +9,11 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.12.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "^5.0.0"
   },
-  "devDependencies": {},
   "browserslist": {
     "production": [
       ">0.2%",
@@ -25,5 +25,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "typescript": "^3.2.1"
   }
 }

@@ -1,21 +1,22 @@
+import React from 'react'
 import {useState} from "react";
-import {Board} from "./components/Board";
+import {Board} from "./Board";
 
-export default function Game() {
+export function Game() {
     let gameIsEnded = false;
 
-    const [history, setHistory] = useState([Array(9).fill(null)]);
-    const [currentMove, setCurrentMove] = useState(0);
+    const [history, setHistory] = useState<Array<Array<string | null>>>([Array(9).fill(null)]);
+    const [currentMove, setCurrentMove] = useState<number>(0);
     const currentSquares= history[currentMove];
     const xIsNext = currentMove % 2 === 0;
 
-    function handlePlay(nextSquares) {
+    function handlePlay(nextSquares: Array<string | null>): void {
         const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
         setHistory(nextHistory);
         setCurrentMove(nextHistory.length - 1);
     }
 
-    function jumpTo(nextMove) {
+    function jumpTo(nextMove : number): void {
         //revert move
         setCurrentMove(nextMove);
         //reset ended game
@@ -30,16 +31,16 @@ export default function Game() {
             description = 'Go to game start';
         }
         return (
-            <li>
-                <button onClick={() => jumpTo(move)}>{description}</button>
-            </li>
+                <li key={move}>
+                    <button onClick={() => jumpTo(move)}>{description}</button>
+                </li>
         );
     });
 
     return (
         <div className="game">
             <div className="game-board">
-                <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
+                <Board xIsNext={xIsNext} gameIsEnded={gameIsEnded} squares={currentSquares} onPlay={handlePlay}/>
             </div>
             <div className="game-info">
                 <ol>{moves}</ol>
