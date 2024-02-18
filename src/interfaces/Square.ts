@@ -1,4 +1,4 @@
 export interface SquareProps {
-    value: string | null;
-    onSquareClick: () => void;
+  value: string | null;
+  onSquareClick: () => void;
 }
