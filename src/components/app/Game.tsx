@@ -50,6 +50,8 @@ export const Game: React.FC = () => {
     );
   });
 
+  console.log(process.env.REACT_APP_USE_SERVER)
+
   return (
     <div className="game">
       <div className="game-board">

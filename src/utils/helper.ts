@@ -1,4 +1,6 @@
 export function calculateWinner(squares: Array<string | null>): string | null {
+  console.log("squares=",squares);
+  console.log(JSON.stringify(squares));
   const lines: Array<Array<number>> = [
     [0, 1, 2],
     [3, 4, 5],

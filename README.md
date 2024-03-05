@@ -1,13 +1,14 @@
 # tic-tac-toe
-
 my tests with React
 
 # used with:
-
 - React
 - React Router
 - Firebase to authenticate
+- Axios
+- Environment Variables
 
-# TODO
-
-- add winner calculate as a server function
+# used with (server side):
+- Node.js
+- Express
+- Cors

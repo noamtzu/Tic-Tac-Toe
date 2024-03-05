@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import { Square } from './Square';
 import { BoardProps } from '../../interfaces/Board';
 import { calculateWinner } from '../../utils/helper';
 
 export const Board: React.FC<BoardProps> = ({ xIsNext, gameIsEnded, squares, onPlay }) => {
+    const [status, setStatus] = useState("");
   const handleClick = (i: number): void => {
     // Do nothing in case the square is full or the game is ended
     if (gameIsEnded || squares[i]) {
@@ -20,14 +22,22 @@ export const Board: React.FC<BoardProps> = ({ xIsNext, gameIsEnded, squares, onP
     onPlay(nextSquares);
   };
 
-  const winner: string | null = calculateWinner(squares);
-  let status: string;
-  if (winner) {
-    status = 'Winner: ' + winner;
-    gameIsEnded = true;
-  } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
-  }
+  useEffect(() => {
+      //const winner: string | null = calculateWinner(squares);
+      axios.post('http://localhost:4000/calculate-winner', squares)
+          .then(response => {
+              const data = response.data.toString();
+              if (data && data.length > 0) {
+                  setStatus('Winner: ' + data);
+                  gameIsEnded = true;
+              } else {
+                  setStatus('Next player: ' + (xIsNext ? 'X' : 'O'));
+              }
+          })
+          .catch(error => {
+              console.error('Error sending data:', error);
+          });
+  }, );
 
   return (
     <>
